@@ -9,3 +9,9 @@
 ### Dashboard
 
 ![dashboard](https://i.imgur.com/rsVboMQ.png)
+
+### Monitoring
+
+![monitoring](https://i.imgur.com/GZSg4Ej.png)
+
+![monitoring2](https://i.imgur.com/L7Q684B.png)
