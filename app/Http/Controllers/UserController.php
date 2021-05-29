@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -23,6 +24,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user');
+        $users = User::orderBy('created_at', 'ASC')->paginate(5);
+        return view('user', ['users' => $users]);
     }
 }
