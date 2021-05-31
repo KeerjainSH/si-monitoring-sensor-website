@@ -1,3 +1,6 @@
+@if ($loggedin->level != 'admin' && $item['url'] == 'user')
+    {{-- Nothing --}}
+@else
 <li @isset($item['id']) id="{{ $item['id'] }}" @endisset class="nav-item">
 
     <a class="nav-link {{ $item['class'] }} @isset($item['shift']) {{ $item['shift'] }} @endisset"
@@ -21,3 +24,4 @@
     </a>
 
 </li>
+@endif

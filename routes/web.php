@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,7 +25,9 @@ Route::get('/graphic', [App\Http\Controllers\GraphicController::class, 'index'])
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('user');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
+    $id = Auth::id();
+    $loggedin = User::find($id);
+    return view('dashboard', ['loggedin' => $loggedin]);
 })->name('dashboard');
 
 Auth::routes();

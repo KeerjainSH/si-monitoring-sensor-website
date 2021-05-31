@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class GraphicController extends Controller
 {
@@ -23,6 +25,8 @@ class GraphicController extends Controller
      */
     public function index()
     {
-        return view('graphic');
+        $id = Auth::id();
+        $loggedin = User::find($id);
+        return view('graphic', ['loggedin' => $loggedin]);
     }
 }

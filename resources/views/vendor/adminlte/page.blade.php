@@ -29,7 +29,7 @@
 
         {{-- Left Main Sidebar --}}
         @if(!$layoutHelper->isLayoutTopnavEnabled())
-            @include('adminlte::partials.sidebar.left-sidebar')
+            @include('adminlte::partials.sidebar.left-sidebar', ['loggedin' => $loggedin])
         @endif
 
         {{-- Content Wrapper --}}

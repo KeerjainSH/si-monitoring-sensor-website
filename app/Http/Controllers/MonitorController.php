@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class MonitorController extends Controller
 {
@@ -23,6 +25,8 @@ class MonitorController extends Controller
      */
     public function index()
     {
-        return view('monitor');
+        $id = Auth::id();
+        $loggedin = User::find($id);
+        return view('monitor', ['loggedin' => $loggedin]);
     }
 }

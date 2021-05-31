@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('adminlte::page', ['loggedin' => $loggedin])
 
 @section('title', 'Monitoring')
 
@@ -36,7 +36,7 @@
 
     </div>
 </div>
-
+@if ($loggedin->level == 'admin')
 <div class='card'>
     <div class='card-header border'>
         <i class="fas fa-upload"></i> Import Excel
@@ -46,7 +46,7 @@
             <div class="container p-3">
                 <div class="custom-file mb-3">
                     <input type="file" class="custom-file-input" id="customFile">
-                    <label class="custom-file-label" for="customFile">File Attachment (.xlsx)</label>
+                    <label class="custom-file-label" for="customFile"></label>
                 </div>
                 
                 <input type='button' class='btn btn-primary' type='submit' value='Import'></input>
@@ -57,7 +57,7 @@
 
     </div>
 </div>
-
+@endif
 <script type="text/javascript">
     $('.date').datepicker({  
        format: 'mm-dd-yyyy'

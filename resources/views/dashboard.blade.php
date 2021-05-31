@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('adminlte::page', ['loggedin' => $loggedin])
 
 @section('title', 'Dashboard')
 
@@ -11,6 +11,7 @@
 @section('content')
 <div class='card'>
     <div class='card-body bg-light border'>
+    
         <table class='table table-striped table-hover table-bordered mb-sm-3'>
             <thead>
                 <tr>
@@ -45,6 +46,7 @@
             <button type='button' class='btn btn-primary'>Go Somewhere???</button>
         </div>
     </div>
+    @if ($loggedin->level == 'admin')
     <div class='card-footer border' style='background-color:#f7f7f7'>
         <div class='row'>
             <div class="col-sm-4">
@@ -106,6 +108,7 @@
             </div>
         </div>
     </div>
+    @endif
 </div>
 @stop
 
