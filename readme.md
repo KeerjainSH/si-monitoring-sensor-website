@@ -19,3 +19,7 @@
 ### Daftar User
 
 ![users](https://i.imgur.com/LZKgxrJ.png)
+
+### Chart
+
+![chart](https://i.imgur.com/GXU5Ogq.png)
