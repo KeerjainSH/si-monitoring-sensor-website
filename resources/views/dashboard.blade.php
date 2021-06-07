@@ -9,37 +9,31 @@
 @stop
 
 @section('content')
+
 <div class='card'>
     <div class='card-body bg-light border'>
-    
         <table class='table table-striped table-hover table-bordered mb-sm-3'>
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Beban 1</th>
-                    <th>Beban 2</th>
-                    <th>Beban 3</th>
+                    <th>Sensor 1</th>
+                    <th>Sensor 2</th>
+                    <th>Sensor 3</th>
+                    <th>Sensor 4</th>
+                    <th>Sensor 5</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>224</td>
-                    <td>34.90</td>
-                    <td>65.00</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>223</td>
-                    <td>34.90</td>
-                    <td>65.00</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>222</td>
-                    <td>35.10</td>
-                    <td>64.00</td>
-                    <td></td>
-                </tr>
+            <tbody class='sensorTable'>
+                <div class="">
+                    <!-- <tr>
+                        <td>No</td>
+                        <td>Sensor 1</td>
+                        <td>Sensor 2</td>
+                        <td>Sensor 3</td>
+                        <td>Sensor 4</td>
+                        <td>Sensor 5</td>
+                    </tr> -->
+                </div>
             </tbody>
         </table>
         <div class='col-sm text-center'>
@@ -118,4 +112,55 @@
 
 @section('js')
     
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script> -->
+<script>
+//   var ctx = document.getElementById("myChart");
+  var data
+  var count = 0 ;
+  var updateData = function() {
+    $.ajax({
+      url: "{{ route('fetchData') }}",
+      type: 'GET',
+      dataType: 'json',
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      success: function(data) {
+        //   var newCount = data.length ;
+        //   if (newCount != count) {
+        //       count = newCount ;
+        //       event(new App/Events/SensorUpdated()) ;
+        //   }
+        var resultTag = "" ;
+        var i = 0 ;
+        // console.log(j) ;
+        // j++ ;
+        $.each(data, function(){
+            var j = i+1 ;
+            resultTag += 
+            "<tr>" +
+                "<td>" + j + "</td>" +
+                "<td>" + data[i]['sensor1'].toFixed(2) + "</td>" +
+                "<td>" + data[i]['sensor2'].toFixed(2) + "</td>" +
+                "<td>" + data[i]['sensor3'].toFixed(2) + "</td>" +
+                "<td>" + data[i]['sensor4'].toFixed(2) + "</td>" +
+                "<td>" + data[i]['sensor5'].toFixed(2) + "</td>" +
+            "</tr>"
+            i += 1 ;
+        }) ;
+        $('.sensorTable').html(resultTag) ;
+        // console.log(data) ;
+      },
+      error: function(data){
+        console.log(data);
+      }
+    });
+  }
+  
+  updateData();
+  setInterval(() => {
+    updateData();
+  }, 5000);
+</script>
+<!-- <script src="{{ mix('/js/app.js') }}"></script> -->
 @stop

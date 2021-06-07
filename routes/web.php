@@ -24,11 +24,19 @@ Route::get('/graphic', [App\Http\Controllers\GraphicController::class, 'index'])
 
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('user');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    $id = Auth::id();
-    $loggedin = User::find($id);
-    return view('dashboard', ['loggedin' => $loggedin]);
-})->name('dashboard');
+Route::get('/user/delete', [App\Http\Controllers\DeleteController::class, 'index'])->name('user.delete');
+
+Route::get('/user/edit', [App\Http\Controllers\EditController::class, 'index'])->name('user.edit');
+
+Route::get('/user/admin', [App\Http\Controllers\AddAdminController::class, 'index'])->name('user.admin');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+// function () {
+//     $id = Auth::id();
+//     $loggedin = User::find($id);
+//     return view('dashboard', ['loggedin' => $loggedin]);
+// }
+
 
 Auth::routes();
 

@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/fetchData', [App\Http\Controllers\API\APIController::class, 'fetchData'])->name('fetchData');
+
+Route::get('/getGraphicData', [App\Http\Controllers\API\APIController::class, 'getGraphicData'])->name('getGraphicData') ;
