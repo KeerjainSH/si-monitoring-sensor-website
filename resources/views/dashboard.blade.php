@@ -127,6 +127,7 @@
       },
       success: function(data) {
         //   var newCount = data.length ;
+        console.log(data) ;
         //   if (newCount != count) {
         //       count = newCount ;
         //       event(new App/Events/SensorUpdated()) ;
@@ -149,7 +150,6 @@
             i += 1 ;
         }) ;
         $('.sensorTable').html(resultTag) ;
-        // console.log(data) ;
       },
       error: function(data){
         console.log(data);
