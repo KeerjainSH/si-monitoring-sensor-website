@@ -1,10 +1,12 @@
 # SI Monitoring Sensor
 ## Cara Clone Project Laravel dari Github
 ### Tahap Persiapan
+Pastikan sudah menginstall composer dalam pc anda
+
 1. Clone repositori dengan menggunakan command line atau bisa juga dengan mendownload zip nya
 2. Jika menggunakan zip, ekstrak folder project ke direktori xampp/htdocs
 3. Buka command prompt (Jika menggunakan windows), lalu pindahkan working directory ke folder project
-4. Masukkan perintah ```npm install``` pada command prompt, lalu command prompt akan menginstall library yang digunakan dalam project
+4. Masukkan perintah ```composer install``` pada command prompt, lalu command prompt akan menginstall library yang digunakan dalam project
 5. Copy file ```.env.example``` dan beri nama ```.env``` dengan cara memasukkan perintah ```copy .env.example .env``` kedalam comand prompt
 6. Buat kode enkripsi aplikasi laravel dengan memasukkan perintah ```php artisan key:generate```
 
