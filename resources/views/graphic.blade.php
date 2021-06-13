@@ -15,10 +15,8 @@
 <div class='card'>
     <div class='card-body'>
         <div id='chartku'></div>
-        <!-- <canvas id="myChart"></canvas> -->
     </div>
 </div>
-
 
 @stop
 
@@ -34,7 +32,7 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
 <script>
-    var header = ['TimeStamp', 'Arus (A)', 'Tegangan (V)', 'Getaran (Hz)', 'Thermocouple (C)', 'Lupa'] ;
+    var header = ['TimeStamp', 'Arus (A)', 'Tegangan (V)', 'Getaran (Hz)', 'Thermocouple (C)'] ;
     var data, row, i ;
 
     google.charts.load('current', {'packages':['corechart']});
@@ -51,7 +49,7 @@
           if (i == 0) {
             data1 = Object.values(value) ;
             var d = new Date(data1[0]) ;
-            data1[0] = first - d ;
+            data1[0] = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds() ;
           }
           if (i == 1) {
             data2 = Object.values(value) ;

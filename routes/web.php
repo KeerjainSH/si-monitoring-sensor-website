@@ -36,7 +36,13 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [App\Http\Con
 //     $loggedin = User::find($id);
 //     return view('dashboard', ['loggedin' => $loggedin]);
 // }
+Route::get('/sensor/export', [App\Http\Controllers\ExportSensorController::class, 'index'])->name('sensor.export') ;
 
+Route::get('/sensor/import', [App\Http\Controllers\ImportSensorController::class, 'show'])->name('sensor.import.show') ;
+
+Route::post('/sensor/import', [App\Http\Controllers\ImportSensorController::class, 'index'])->name('sensor.import') ;
+
+Route::get('/sensor/setstatus/{id}/{status}', [App\Http\Controllers\StatusController::class, 'setSensorStatus'])->name('sensor.status') ;
 
 Auth::routes();
 

@@ -16,8 +16,7 @@ class Sensor extends Model
         'sensor1',
         'sensor2',
         'sensor3',
-        'sensor4',
-        'sensor5'
+        'sensor4'
     ];
 
     // public function getCreatedAtAttribute($date)

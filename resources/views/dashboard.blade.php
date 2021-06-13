@@ -20,7 +20,6 @@
                     <th>Sensor 2</th>
                     <th>Sensor 3</th>
                     <th>Sensor 4</th>
-                    <th>Sensor 5</th>
                 </tr>
             </thead>
             <tbody class='sensorTable'>
@@ -36,70 +35,35 @@
                 </div>
             </tbody>
         </table>
-        <div class='col-sm text-center'>
-            <button type='button' class='btn btn-primary'>Go Somewhere???</button>
-        </div>
+        
     </div>
     @if ($loggedin->level == 'admin')
     <div class='card-footer border' style='background-color:#f7f7f7'>
-        <div class='row'>
-            <div class="col-sm-4">
-                <div class='card bg-light align-items-center'>
-                    <div class='card-header'>SENSOR 1</div>
-                    <div class='card-body'>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-success">ON</button>
-                            <button type="button" class="btn btn-warning">OFF</button>
-                        </div>
+        @if (session('status'))
+            <div class="alert alert-success my-3" role='alert'>
+                {{ session('status') }}
+            </div>
+        @endif
+        <div class="card-columns">
+        @forelse($sensorstatus as $sensor)
+            <div class='card bg-light align-items-center'>
+                <div class='card-header'>
+                    {{$sensor->name}}
+                    <button class="btn btn-sm btn-primary float-right disabled">
+                        {{ $sensor->status == 1 ? 'On' : 'Off' }}
+                    </button>
+                </div>
+                <div class='card-body'>
+                    <div class="btn-group">
+                        <a type='button' href="{{ route('sensor.status', [$sensor->id, '1']) }}" class='btn btn-success'>ON</a>
+                        <a type='button' href="{{ route('sensor.status', [$sensor->id, '0']) }}" class='btn btn-warning'>OFF</a>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4">
-                <div class='card bg-light align-items-center'>
-                    <div class='card-header'>SENSOR 2</div>
-                    <div class='card-body'>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-success">ON</button>
-                            <button type="button" class="btn btn-warning">OFF</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class='card bg-light align-items-center'>
-                    <div class='card-header'>SENSOR 3</div>
-                    <div class='card-body'>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-success">ON</button>
-                            <button type="button" class="btn btn-warning">OFF</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class='row'>
-            <div class="col-sm-4">
-                <div class='card bg-light align-items-center'>
-                    <div class='card-header'>SENSOR 4</div>
-                    <div class='card-body'>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-success">ON</button>
-                            <button type="button" class="btn btn-warning">OFF</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class='card bg-light align-items-center'>
-                    <div class='card-header'>SENSOR 5</div>
-                    <div class='card-body'>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-success">ON</button>
-                            <button type="button" class="btn btn-warning">OFF</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        @empty
+            Insert 5 Sensor First
+        @endforelse
+            
         </div>
     </div>
     @endif
@@ -114,7 +78,6 @@
     
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script> -->
 <script>
-//   var ctx = document.getElementById("myChart");
   var data
   var count = 0 ;
   var updateData = function() {
@@ -126,26 +89,19 @@
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
       success: function(data) {
-        //   var newCount = data.length ;
-        console.log(data) ;
-        //   if (newCount != count) {
-        //       count = newCount ;
-        //       event(new App/Events/SensorUpdated()) ;
-        //   }
+
         var resultTag = "" ;
         var i = 0 ;
-        // console.log(j) ;
-        // j++ ;
+        
         $.each(data, function(){
             var j = i+1 ;
             resultTag += 
             "<tr>" +
                 "<td>" + j + "</td>" +
-                "<td>" + data[i]['sensor1'].toFixed(2) + "</td>" +
-                "<td>" + data[i]['sensor2'].toFixed(2) + "</td>" +
-                "<td>" + data[i]['sensor3'].toFixed(2) + "</td>" +
-                "<td>" + data[i]['sensor4'].toFixed(2) + "</td>" +
-                "<td>" + data[i]['sensor5'].toFixed(2) + "</td>" +
+                "<td>" + data[9-i]['sensor1'].toFixed(2) + "</td>" +
+                "<td>" + data[9-i]['sensor2'].toFixed(2) + "</td>" +
+                "<td>" + data[9-i]['sensor3'].toFixed(2) + "</td>" +
+                "<td>" + data[9-i]['sensor4'].toFixed(2) + "</td>" +
             "</tr>"
             i += 1 ;
         }) ;
@@ -162,5 +118,4 @@
     updateData();
   }, 5000);
 </script>
-<!-- <script src="{{ mix('/js/app.js') }}"></script> -->
 @stop

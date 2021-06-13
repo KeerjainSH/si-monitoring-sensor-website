@@ -21,3 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/fetchData', [App\Http\Controllers\API\APIController::class, 'fetchData'])->name('fetchData');
 
 Route::get('/getGraphicData', [App\Http\Controllers\API\APIController::class, 'getGraphicData'])->name('getGraphicData') ;
+
+Route::post('/addData', [App\Http\Controllers\API\APIController::class, 'addData'])->name('addData') ;

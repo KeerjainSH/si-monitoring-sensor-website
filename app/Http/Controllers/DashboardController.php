@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Models\SensorStatus;
 
 class DashboardController extends Controller
 {
@@ -28,7 +29,9 @@ class DashboardController extends Controller
         $id = Auth::id();
         $loggedin = User::find($id);
 
-        return view('dashboard', ['loggedin' => $loggedin]);
+        $sensorstatus = SensorStatus::all() ;
+
+        return view('dashboard', ['loggedin' => $loggedin, 'sensorstatus' => $sensorstatus]);
     }
 
 
