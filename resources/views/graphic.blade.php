@@ -63,7 +63,7 @@
 
         var options = {
           title: 'Grafik Perubahan Data (' + first.toDateString() + ')' ,
-          curveType: 'function',
+          // curveType: 'function',
           height:500,
           legend: { position: 'bottom' },
           series: {

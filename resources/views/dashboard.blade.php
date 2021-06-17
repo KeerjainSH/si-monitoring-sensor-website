@@ -96,14 +96,14 @@
         var len = data.length ;
         
         $.each(data, function(){
-            var j = i+1 ;
+            var j = len-i ;
             resultTag += 
             "<tr>" +
                 "<td>" + j + "</td>" +
-                "<td>" + data[len - i - 1]['sensor1'].toFixed(2) + "</td>" +
-                "<td>" + data[len - i - 1]['sensor2'].toFixed(2) + "</td>" +
-                "<td>" + data[len - i - 1]['sensor3'].toFixed(2) + "</td>" +
-                "<td>" + data[len - i - 1]['sensor4'].toFixed(2) + "</td>" +
+                "<td>" + data[i]['sensor1'].toFixed(2) + "</td>" +
+                "<td>" + data[i]['sensor2'].toFixed(2) + "</td>" +
+                "<td>" + data[i]['sensor3'].toFixed(2) + "</td>" +
+                "<td>" + data[i]['sensor4'].toFixed(2) + "</td>" +
             "</tr>"
             i += 1 ;
         }) ;

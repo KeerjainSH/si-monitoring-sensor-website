@@ -81,7 +81,7 @@ class APIController extends Controller
                 }
                 
                 if ($col == "E") {
-                    $val = date('Y-m-d H-i-s' ,\PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($val));
+                    $val = date('Y-m-d H-i-s' ,\PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($val, "Asia/Jakarta"));
                 }
                 $data_row[$field] = $val;
             }
