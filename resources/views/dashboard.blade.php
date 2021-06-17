@@ -61,7 +61,9 @@
                 </div>
             </div>
         @empty
-            Insert 5 Sensor First
+            <div class="alert alert-warning my-3" role='alert'>
+                Status Table is Empty
+            </div>
         @endforelse
             
         </div>
@@ -76,11 +78,10 @@
 
 @section('js')
     
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script> -->
 <script>
   var data
-  var count = 0 ;
   var updateData = function() {
+    $.post("{{ route('syncExcel') }}") ;
     $.ajax({
       url: "{{ route('fetchData') }}",
       type: 'GET',
@@ -92,16 +93,17 @@
 
         var resultTag = "" ;
         var i = 0 ;
+        var len = data.length ;
         
         $.each(data, function(){
             var j = i+1 ;
             resultTag += 
             "<tr>" +
                 "<td>" + j + "</td>" +
-                "<td>" + data[9-i]['sensor1'].toFixed(2) + "</td>" +
-                "<td>" + data[9-i]['sensor2'].toFixed(2) + "</td>" +
-                "<td>" + data[9-i]['sensor3'].toFixed(2) + "</td>" +
-                "<td>" + data[9-i]['sensor4'].toFixed(2) + "</td>" +
+                "<td>" + data[len - i - 1]['sensor1'].toFixed(2) + "</td>" +
+                "<td>" + data[len - i - 1]['sensor2'].toFixed(2) + "</td>" +
+                "<td>" + data[len - i - 1]['sensor3'].toFixed(2) + "</td>" +
+                "<td>" + data[len - i - 1]['sensor4'].toFixed(2) + "</td>" +
             "</tr>"
             i += 1 ;
         }) ;

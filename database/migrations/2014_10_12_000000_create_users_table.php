@@ -23,7 +23,18 @@ class CreateUsersTable extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->text('profile_photo_path')->nullable();
             $table->timestamps();
+            $table->string('level');
         });
+
+        DB::table('users')->insert(
+            array
+            (
+                'name' => 'admin', 
+                'email' => 'admin@admin.com',
+                'password' => Hash::make('admin'),
+                'level' => 'admin'
+            )
+        ) ;
     }
 
     /**

@@ -33,53 +33,36 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
 <script>
     var header = ['TimeStamp', 'Arus (A)', 'Tegangan (V)', 'Getaran (Hz)', 'Thermocouple (C)'] ;
-    var data, row, i ;
+    var data, i, ds, first ;
 
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
-      var data1 ;  var data2 ; var data3 ;
-      var data4 ; var data5 ; var ds ;
+      $.post("{{ route('syncExcel') }}") ;
       $.get("{{ route('getGraphicData') }}", function(req){
-        i = 0 ;
-        var first = new Date(req[4]['created_at']) ;
-        console.log(req) ;
-        $.each(req, function(key, value) {
-          if (i == 0) {
-            data1 = Object.values(value) ;
-            var d = new Date(data1[0]) ;
-            data1[0] = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds() ;
-          }
+        i = 1 ;
+        data = [] ;
+        data.push(header) ;
+        
+        $.each(req.reverse(), function(key, value) {
+          
+          data.push(Object.values(value)) ;
+
           if (i == 1) {
-            data2 = Object.values(value) ;
-            var d = new Date(data2[0]) ;
-            data2[0] = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds() ;
+            first = new Date(data[i][0]) ;
           }
-          if (i == 2){
-            data3 = Object.values(value) ;
-            var d = new Date(data3[0]) ;
-            data3[0] = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds() ;
-          }
-          if (i == 3){
-            data4 = Object.values(value) ;
-            var d = new Date(data4[0]) ;
-            data4[0] = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds() ;
-          }
-          if (i == 4) {
-            data5 = Object.values(value) ;
-            ds = new Date(data5[0]) ;
-            data5[0] = ds.getHours() + ':' + ds.getMinutes() + ':' + ds.getSeconds() ;
-          } 
+          // console.log(data[i][0]) ;
+          ds = new Date(data[i][0]) ;
+          // console.log(ds) ;
+          data[i][0] = ds.toLocaleTimeString('en-IN') ;
           i++ ;
         }) ;
-
-        var dataChart = google.visualization.arrayToDataTable([
-          header, data5, data4, data3, data2, data1
-        ]);
+        console.log(data) ;
+        var dataChart = google.visualization.arrayToDataTable(data);
 
         var options = {
-          title: 'Grafik Perubahan Data (' + ds.toUTCString() + ')' ,
+          title: 'Grafik Perubahan Data (' + first.toDateString() + ')' ,
           curveType: 'function',
           height:500,
           legend: { position: 'bottom' },

@@ -18,6 +18,19 @@ class SensorStatus extends Migration
             $table->string('name');
             $table->integer('status');
         });
+
+        $sensors = array(
+            array('name' => 'Sensor Arus', 'status' => 1), 
+            array('name' => 'Sensor Tegangan', 'status' => 1), 
+            array('name' => 'Sensor Getaran', 'status' => 1), 
+            array('name' => 'Sensor Thermocouple', 'status' => 1) 
+         ) ;
+         
+         foreach($sensors as $sensor) {
+             DB::table('sensorstatus')->insert(
+                 $sensor
+             ) ;
+         }
     }
 
     /**

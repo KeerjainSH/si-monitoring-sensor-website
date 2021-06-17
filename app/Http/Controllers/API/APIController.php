@@ -17,7 +17,7 @@ class APIController extends Controller
     }
 
     public function getGraphicData() {
-        $sensors = Sensor::select('created_at', 'sensor1', 'sensor2', 'sensor3', 'sensor4')->orderBy('created_at', 'DESC')->take(5)->get();
+        $sensors = Sensor::select('created_at', 'sensor1', 'sensor2', 'sensor3', 'sensor4')->orderBy('created_at', 'DESC')->take(10)->get();
         return $sensors ;
     }
 
@@ -50,5 +50,46 @@ class APIController extends Controller
             'sensor4' => $request->sensor4
         ]) ;
         return $sensor ;
+    }
+
+    public function fetchDataExcel() {
+        $path = storage_path('app\sensorData.xlsm') ;
+        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+
+        $spreadSheet = $reader->load($path);
+        $workSheet = $spreadSheet->getActiveSheet();
+        $startRow = 2;
+        $max = 3000;
+        $columns = [
+            "A"=>"sensor1",
+            "B"=>"sensor2",
+            "C"=>"sensor3",
+            "D"=>"sensor4",
+            "E"=>"created_at"
+        ];
+        $data_insert = [];
+        for($i=$startRow; $i<$max; $i++){
+            
+            $data_row = [];
+            $status = 1 ;
+            foreach ($columns as $col=>$field) {
+                $val = $workSheet->getCell("$col$i")->getValue();
+                
+                if(empty($val) || $val == 0) {
+                    $status = 0 ;
+                    break ;
+                }
+                
+                if ($col == "E") {
+                    $val = date('Y-m-d H-i-s' ,\PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($val));
+                }
+                $data_row[$field] = $val;
+            }
+            if ($status)
+                $data_insert[] = $data_row;
+        }
+        \DB::table('sensor')->truncate();
+        \DB::table('sensor')->insert($data_insert);
+        return 'success' ;
     }
 }

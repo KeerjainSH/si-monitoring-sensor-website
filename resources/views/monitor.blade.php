@@ -83,5 +83,12 @@
       var fileName = $(this).val().split("\\").pop();
       $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
   });
+
+  var sync = function() {
+    $.post("{{ route('syncExcel') }}") ;
+  }
+  setInterval(() => {
+    sync();
+  }, 5000);
 </script>
 @stop
