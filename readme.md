@@ -13,12 +13,8 @@ Pastikan sudah menginstall composer dalam pc anda
 ### Tahap Penyelarasan Aplikasi dengan Database
 1. Membuka phpmyadmin melalui browser
 2. Buat database baru dengan "nama" yang sesuai dengan keinginan anda
-3. Download file ini [data.zip](https://github.com/KeerjainSH/si-monitoring-sensor/files/6643765/data.zip) lalu ekstrak isinya
-4. Buka database baru di phpmyadmin, lalu tekan menu import
-5. Pada kolom "browse in your computer" pilih file data.sql dari file yang barusaja di ekstrak
-6. Tekan tombol "go" di paling bawah halaman phpmyadmin
-7. Buka file .env yang dibuat pada tahap persiapan
-8. Pada bagian ini
+3. Buka file .env yang dibuat pada tahap persiapan
+4. Pada bagian ini
 ```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -28,6 +24,8 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 ganti ```DB_DATABASE=laravel```, menjadi ```DB_DATABASE="nama" database yang telah dibuat```
+5. Masukkan perintah ```php artisan migrate``` pada command prompt
+6. Sistem akan menggenerate akun admin dengan email ```admin@admin.com``` dan password ```admin``` dengan role "admin" secara otomatis (silahkan gunakan untuk login pertama kali)
 
 ### Tahap Akhir
 Gunakan perintah ```php artisan serve``` untuk memulai local development server
