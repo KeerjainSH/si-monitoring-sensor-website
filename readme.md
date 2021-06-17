@@ -24,7 +24,9 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 ganti ```DB_DATABASE=laravel```, menjadi ```DB_DATABASE="nama" database yang telah dibuat```
+
 5. Masukkan perintah ```php artisan migrate``` pada command prompt
+
 6. Sistem akan menggenerate akun admin dengan email ```admin@admin.com``` dan password ```admin``` dengan role "admin" secara otomatis (silahkan gunakan untuk login pertama kali)
 
 ### Tahap Akhir
