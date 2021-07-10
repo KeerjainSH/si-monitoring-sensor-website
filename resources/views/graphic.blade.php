@@ -32,7 +32,7 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
 <script>
-    var header = ['TimeStamp', 'Arus (A)', 'Tegangan (V)', 'Getaran (Hz)', 'Thermocouple (C)'] ;
+    var header = ['TimeStamp'/*, 'Arus (A)', 'Tegangan (V)', 'Getaran (Hz)', 'Thermocouple (C)'*/, 'Temperatur (C)'] ;
     var data, i, ds, first ;
 
     google.charts.load('current', {'packages':['corechart']});

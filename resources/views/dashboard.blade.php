@@ -15,11 +15,11 @@
         <table class='table table-striped table-hover table-bordered mb-sm-3'>
             <thead>
                 <tr>
-                    <th>No</th>
-                    <th>Sensor 1</th>
-                    <th>Sensor 2</th>
+                    <th width='8%'>No</th>
+                    <th width='92%'>Sensor Temperatur</th>
+                    <!-- <th>Sensor 2</th>
                     <th>Sensor 3</th>
-                    <th>Sensor 4</th>
+                    <th>Sensor 4</th> -->
                 </tr>
             </thead>
             <tbody class='sensorTable'>
@@ -101,9 +101,9 @@
             "<tr>" +
                 "<td>" + j + "</td>" +
                 "<td>" + data[i]['sensor1'].toFixed(2) + "</td>" +
-                "<td>" + data[i]['sensor2'].toFixed(2) + "</td>" +
-                "<td>" + data[i]['sensor3'].toFixed(2) + "</td>" +
-                "<td>" + data[i]['sensor4'].toFixed(2) + "</td>" +
+                // "<td>" + data[i]['sensor2'].toFixed(2) + "</td>" +
+                // "<td>" + data[i]['sensor3'].toFixed(2) + "</td>" +
+                // "<td>" + data[i]['sensor4'].toFixed(2) + "</td>" +
             "</tr>"
             i += 1 ;
         }) ;

@@ -17,7 +17,7 @@ class APIController extends Controller
     }
 
     public function getGraphicData() {
-        $sensors = Sensor::select('created_at', 'sensor1', 'sensor2', 'sensor3', 'sensor4')->orderBy('created_at', 'DESC')->take(10)->get();
+        $sensors = Sensor::select('created_at', 'sensor1'/*, 'sensor2', 'sensor3', 'sensor4'*/)->orderBy('created_at', 'DESC')->take(10)->get();
         return $sensors ;
     }
 
@@ -62,10 +62,11 @@ class APIController extends Controller
         $max = 3000;
         $columns = [
             "A"=>"sensor1",
-            "B"=>"sensor2",
-            "C"=>"sensor3",
-            "D"=>"sensor4",
-            "E"=>"created_at"
+            // "B"=>"sensor2",
+            // "C"=>"sensor3",
+            // "D"=>"sensor4",
+            // "E"=>"created_at"
+            "B"=>"created_at"
         ];
         $data_insert = [];
         for($i=$startRow; $i<$max; $i++){
@@ -80,7 +81,7 @@ class APIController extends Controller
                     break ;
                 }
                 
-                if ($col == "E") {
+                if ($col == "B") {
                     $val = date('Y-m-d H-i-s' ,\PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($val, "Asia/Jakarta"));
                 }
                 $data_row[$field] = $val;

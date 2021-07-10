@@ -20,10 +20,10 @@ class SensorStatus extends Migration
         });
 
         $sensors = array(
-            array('name' => 'Sensor Arus', 'status' => 1), 
-            array('name' => 'Sensor Tegangan', 'status' => 1), 
-            array('name' => 'Sensor Getaran', 'status' => 1), 
-            array('name' => 'Sensor Thermocouple', 'status' => 1) 
+            array('name' => 'Motor', 'status' => 1)//, 
+            // array('name' => 'Sensor Tegangan', 'status' => 1), 
+            // array('name' => 'Sensor Getaran', 'status' => 1), 
+            // array('name' => 'Sensor Thermocouple', 'status' => 1) 
          ) ;
          
          foreach($sensors as $sensor) {

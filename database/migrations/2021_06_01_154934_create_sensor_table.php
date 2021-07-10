@@ -16,9 +16,9 @@ class CreateSensorTable extends Migration
         Schema::create('sensor', function (Blueprint $table) {
             $table->id();
             $table->double('sensor1', 8, 2);
-            $table->double('sensor2', 8, 2);
-            $table->double('sensor3', 8, 2);
-            $table->double('sensor4', 8, 2);
+            // $table->double('sensor2', 8, 2);
+            // $table->double('sensor3', 8, 2);
+            // $table->double('sensor4', 8, 2);
             $table->timestamps();
         });
     }

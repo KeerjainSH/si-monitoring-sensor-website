@@ -13,10 +13,10 @@ class Sensor extends Model
     protected $table = 'sensor' ;
 
     protected $fillable = [
-        'sensor1',
-        'sensor2',
-        'sensor3',
-        'sensor4'
+        'sensor1'//,
+        // 'sensor2',
+        // 'sensor3',
+        // 'sensor4'
     ];
 
     // public function getCreatedAtAttribute($date)
