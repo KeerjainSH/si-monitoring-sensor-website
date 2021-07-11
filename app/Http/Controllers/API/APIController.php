@@ -53,20 +53,21 @@ class APIController extends Controller
     }
 
     public function fetchDataExcel() {
-        $path = storage_path('app\sensorData.xlsm') ;
+        $ret = 'zero' ;
+        $path = storage_path('app\nyobadata.xlsm') ;
         $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
 
         $spreadSheet = $reader->load($path);
-        $workSheet = $spreadSheet->getActiveSheet();
+        $workSheet = $spreadSheet->getSheetByName('Simple Data');
         $startRow = 2;
         $max = 3000;
         $columns = [
-            "A"=>"sensor1",
+            "A"=>"created_at",
             // "B"=>"sensor2",
             // "C"=>"sensor3",
             // "D"=>"sensor4",
             // "E"=>"created_at"
-            "B"=>"created_at"
+            "B"=>"sensor1"
         ];
         $data_insert = [];
         for($i=$startRow; $i<$max; $i++){
@@ -75,14 +76,17 @@ class APIController extends Controller
             $status = 1 ;
             foreach ($columns as $col=>$field) {
                 $val = $workSheet->getCell("$col$i")->getValue();
-                
                 if(empty($val) || $val == 0) {
                     $status = 0 ;
                     break ;
                 }
                 
-                if ($col == "B") {
-                    $val = date('Y-m-d H-i-s' ,\PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($val, "Asia/Jakarta"));
+                // $ret = $i;
+                if ($col == "A") {
+                    $date = date('Y-m-d') ;
+                    $val = "$date $val" ;
+                    // $val = date('Y-m-d H:i:s' ,\PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($val, "Asia/Jakarta"));
+                    $ret = 'abc' ;
                 }
                 $data_row[$field] = $val;
             }
@@ -91,7 +95,7 @@ class APIController extends Controller
         }
         \DB::table('sensor')->truncate();
         \DB::table('sensor')->insert($data_insert);
-        return 'success' ;
+        return $ret ;
     }
 
     public function getStatus(Request $req) {

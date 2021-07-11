@@ -12,6 +12,10 @@
 
 <div class='card'>
     <div class='card-body bg-light border'>
+        <div id='force' class="alert alert-danger alert-dismissible d-none" role='alert'>
+            <a href="#" class="close" data-dismiss="alert" aria-label="close" style='text-decoration:none'>&times;</a>
+            Sensor berhenti!
+        </div>
         <table class='table table-striped table-hover table-bordered mb-sm-3'>
             <thead>
                 <tr>
@@ -40,7 +44,8 @@
     @if ($loggedin->level == 'admin')
     <div class='card-footer border' style='background-color:#f7f7f7'>
         @if (session('status'))
-            <div class="alert alert-success my-3" role='alert'>
+            <div class="alert alert-success alert-dismissible my-3" role='alert'>
+                <a href="#" class="close" data-dismiss="alert" aria-label="close" style='text-decoration:none'>&times;</a>
                 {{ session('status') }}
             </div>
         @endif
@@ -79,45 +84,56 @@
 @section('js')
     
 <script>
-  var data
-  var updateData = function() {
-    $.post("{{ route('syncExcel') }}") ;
-    $.ajax({
-      url: "{{ route('fetchData') }}",
-      type: 'GET',
-      dataType: 'json',
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      },
-      success: function(data) {
+    var data
+    var updateData = function() {
+        $.post("{{ route('syncExcel') }}") ;
+        $.ajax({
+            url: "{{ route('fetchData') }}",
+            type: 'GET',
+            dataType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(data) {
 
-        var resultTag = "" ;
-        var i = 0 ;
-        var len = data.length ;
-        
-        $.each(data, function(){
-            var j = len-i ;
-            resultTag += 
-            "<tr>" +
-                "<td>" + j + "</td>" +
-                "<td>" + data[i]['sensor1'].toFixed(2) + "</td>" +
-                // "<td>" + data[i]['sensor2'].toFixed(2) + "</td>" +
-                // "<td>" + data[i]['sensor3'].toFixed(2) + "</td>" +
-                // "<td>" + data[i]['sensor4'].toFixed(2) + "</td>" +
-            "</tr>"
-            i += 1 ;
-        }) ;
-        $('.sensorTable').html(resultTag) ;
-      },
-      error: function(data){
-        console.log(data);
-      }
-    });
-  }
-  
-  updateData();
-  setInterval(() => {
+                var resultTag = "" ;
+                var i = 0 ;
+                var len = data.length ;
+                
+                $.each(data, function(){
+                    var j = len-i ;
+                    if (j == len && data[i]['sensor1'] >= 100) {
+                        $.get('/sensor/setstatus/1') ;
+                        var element = document.getElementById("force");
+                        element.classList.remove("d-none");
+                    }
+                    resultTag += 
+                    "<tr>" +
+                        "<td>" + j + "</td>" +
+                        "<td>" + data[i]['sensor1'].toFixed(2) + "</td>" +
+                        // "<td>" + data[i]['sensor2'].toFixed(2) + "</td>" +
+                        // "<td>" + data[i]['sensor3'].toFixed(2) + "</td>" +
+                        // "<td>" + data[i]['sensor4'].toFixed(2) + "</td>" +
+                    "</tr>"
+                    i += 1 ;
+                }) ;
+                $('.sensorTable').html(resultTag) ;
+                
+                
+            },
+            error: function(data){
+                console.log(data);
+            }
+        });
+    }
+    
     updateData();
+    setInterval(() => {
+        $.get("{{ route('getStatus') }}", {id : 1}, function(data){
+            if (data == 1) {
+                updateData();
+            }
+        }) ;
   }, 5000);
 </script>
 @stop

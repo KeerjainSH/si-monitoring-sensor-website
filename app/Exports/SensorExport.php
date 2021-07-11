@@ -21,10 +21,11 @@ class SensorExport implements FromQuery, WithHeadings
     public function headings(): array
     {
         return [
-            'Sensor Amphere (A)',
-            'Sensor Tegangan (V)',
-            'Sensor Getaran (Hz)',
-            'Sensor Thermocouple (°C)',
+            // 'Sensor Amphere (A)',
+            // 'Sensor Tegangan (V)',
+            // 'Sensor Getaran (Hz)',
+            // 'Sensor Thermocouple (°C)',
+            'Sensor Temperatur (°C)',
             'Waktu Masuk'
         ];
     }
@@ -32,7 +33,7 @@ class SensorExport implements FromQuery, WithHeadings
     public function query()
     {
         return Sensor::query()
-        ->select('sensor1', 'sensor2', 'sensor3', 'sensor4', 'created_at')
+        ->select('sensor1'/*, 'sensor2', 'sensor3', 'sensor4'*/, 'created_at')
         ->where('created_at', '>', $this->mulai)
         ->where('created_at', '<=', $this->akhir) ;
     }

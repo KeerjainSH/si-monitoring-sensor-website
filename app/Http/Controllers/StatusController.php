@@ -12,4 +12,10 @@ class StatusController extends Controller
         $sensor->update(['status' => $status]) ;
         return back()->withStatus('Status Sensor Berhasil Diubah') ;
     }
+    
+    public function autoOff($id) {
+        $sensor = SensorStatus::find($id) ;
+        $sensor->update(['status' => '0']) ;
+        return back()->withStatus('Status Sensor dimatikan') ;
+    }
 }

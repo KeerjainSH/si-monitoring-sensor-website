@@ -43,6 +43,7 @@ Route::get('/sensor/import', [App\Http\Controllers\ImportSensorController::class
 Route::post('/sensor/import', [App\Http\Controllers\ImportSensorController::class, 'index'])->name('sensor.import') ;
 
 Route::get('/sensor/setstatus/{id}/{status}', [App\Http\Controllers\StatusController::class, 'setSensorStatus'])->name('sensor.status') ;
+Route::get('/sensor/setstatus/{id}', [App\Http\Controllers\StatusController::class, 'autoOff'])->name('sensor.autoOff') ;
 
 Auth::routes();
 
