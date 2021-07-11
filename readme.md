@@ -1,4 +1,8 @@
 # SI Monitoring Sensor
+
+## Cara clone Project Github
+bida dilihat disini https://medium.com/@sarascahya/cara-clone-sebuah-repository-di-github-aa633c3260aa
+
 ## Cara Clone Project Laravel dari Github
 ### Tahap Persiapan
 Pastikan sudah menginstall composer dalam pc anda
