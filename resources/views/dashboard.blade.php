@@ -54,7 +54,7 @@
             <div class='card bg-light align-items-center'>
                 <div class='card-header'>
                     {{$sensor->name}}
-                    <button class="btn btn-sm btn-primary float-right disabled">
+                    <button class="btn btn-sm btn-primary float-right disabled stats">
                         {{ $sensor->status == 1 ? 'On' : 'Off' }}
                     </button>
                 </div>
@@ -106,6 +106,7 @@
                         $.get('/sensor/setstatus/1') ;
                         var element = document.getElementById("force");
                         element.classList.remove("d-none");
+                        $('.stats').html('Off') ;
                     }
                     resultTag += 
                     "<tr>" +
@@ -118,8 +119,6 @@
                     i += 1 ;
                 }) ;
                 $('.sensorTable').html(resultTag) ;
-                
-                
             },
             error: function(data){
                 console.log(data);
