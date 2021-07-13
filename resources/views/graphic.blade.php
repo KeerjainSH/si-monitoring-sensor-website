@@ -73,14 +73,14 @@
           // curveType: 'function',
           height:500,
           width:'100%',
-          legend: { position: 'right' },
+          legend: { position: 'bottom' },
           explorer: {axis: 'horizontal'},
           hAxis: {  
             title:'Waktu (hh:mm:ss)', 
             ticks: ticks,
             format: 'HH:mm:ss',
-            showTextEvery: 1,
-            maxAlternation: 2
+            // showTextEvery: 1,
+            // maxAlternation: 2
           },
           series: {
                 0: { 
