@@ -39,6 +39,7 @@
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
+      ticks = [] ;
       $.post("{{ route('syncExcel') }}") ;
       $.get("{{ route('getGraphicData') }}", function(req){
         i = 1 ;
@@ -52,10 +53,16 @@
           if (i == 1) {
             first = new Date(data[i][0]) ;
           }
+
           // console.log(data[i][0]) ;
           ds = new Date(data[i][0]) ;
           // console.log(ds) ;
-          data[i][0] = ds.toLocaleString('en-IN') ;
+          data[i][0] = ds ;
+
+          if (i == 1 || i % 5 == 0) {
+            ticks.push(data[i][0]) ;
+          }
+
           i++ ;
         }) ;
         console.log(data) ;
@@ -65,14 +72,21 @@
           title: 'Grafik Perubahan Data (' + first.toDateString() + ')' ,
           // curveType: 'function',
           height:500,
-          legend: { position: 'bottom' },
+          width:'100%',
+          legend: { position: 'right' },
+          explorer: {axis: 'horizontal'},
+          hAxis: {  
+            title:'Waktu (hh:mm:ss)', 
+            ticks: ticks,
+            format: 'HH:mm:ss',
+            showTextEvery: 1,
+            maxAlternation: 2
+          },
           series: {
-                0: { pointShape: 'circle' },
-                1: { pointShape: 'triangle' },
-                2: { pointShape: 'square' },
-                3: { pointShape: 'diamond' },
-                4: { pointShape: 'star' },
-                5: { pointShape: 'polygon' }
+                0: { 
+                  pointShape: 'circle', 
+                  targetAxisIndex: 0  
+                }
           }
         };
 

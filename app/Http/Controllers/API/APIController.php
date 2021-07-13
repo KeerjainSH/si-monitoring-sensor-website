@@ -13,11 +13,14 @@ class APIController extends Controller
     public function fetchData(){
         $sensors = Sensor::orderBy('created_at', 'DESC')->take(10)->get();
         // dd($sensors);
-        return $sensors;
+        $count = Sensor::count() ;
+        $data['sensors'] = $sensors ;
+        $data['count'] = $count ;
+        return $data ;
     }
 
     public function getGraphicData() {
-        $sensors = Sensor::select('created_at', 'sensor1'/*, 'sensor2', 'sensor3', 'sensor4'*/)->orderBy('created_at', 'DESC')->take(10)->get();
+        $sensors = Sensor::select('created_at', 'sensor1'/*, 'sensor2', 'sensor3', 'sensor4'*/)->orderBy('created_at', 'DESC')->take(50)->get();
         return $sensors ;
     }
 

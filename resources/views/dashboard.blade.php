@@ -94,12 +94,12 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            success: function(data) {
+            success: function(val) {
 
                 var resultTag = "" ;
                 var i = 0 ;
-                var len = data.length ;
-                
+                var len = val['count'] ;
+                var data = val['sensors'] ;
                 $.each(data, function(){
                     var j = len-i ;
                     if (j == len && data[i]['sensor1'] >= 100) {
